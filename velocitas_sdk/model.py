@@ -33,7 +33,7 @@ from velocitas_sdk.proto.types_pb2 import (
     Uint32Array,
     Uint64Array,
 )
-from velocitas_sdk.vdb.client import VehicleDataBrokerClient
+from velocitas_sdk.vdb.client import VehicleDataBrokerClient, get_vdb_client
 from velocitas_sdk.vdb.subscriptions import SubscriptionManager, VdbSubscription
 from velocitas_sdk.vdb.types import TypedDataPointResult
 
@@ -59,7 +59,7 @@ class Node:
         self.parent = parent
 
     def get_client(self):
-        return VehicleDataBrokerClient()
+        return get_vdb_client()
 
     async def start(self):
         tasks = list(SubscriptionManager._subscription_tasks.values())

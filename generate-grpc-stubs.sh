@@ -25,4 +25,10 @@ python3 -m grpc_tools.protoc -I ./velocitas_sdk/proto --grpc_python_out=./veloci
 mv -f ./velocitas_sdk/proto/**/*.py ./velocitas_sdk/proto
 mv -f ./velocitas_sdk/proto/**/*.pyi ./velocitas_sdk/proto
 
-sed -i -e 's/from sdv\..* import/from velocitas_sdk.proto import/g' -e 's/import sdv\..*\./import velocitas_sdk.proto./g' ./velocitas_sdk/proto/*.py*
+sed -i \
+  -e 's/from sdv\..* import/from velocitas_sdk.proto import/g' \
+  -e 's/import sdv\..*\./import velocitas_sdk.proto./g' \
+  -e 's/from kuksa_val_v2 import \(\w*\) as/from velocitas_sdk.proto import \1 as/g' \
+  ./velocitas_sdk/proto/*.py*
+
+rm -f ./velocitas_sdk/proto/val2_types_pb2_grpc.py
