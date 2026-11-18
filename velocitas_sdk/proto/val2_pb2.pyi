@@ -7,892 +7,734 @@ It is renamed to val2.proto to avoid filename collisions with the existing
 sdv.databroker.v1 broker.proto when generated stubs are flattened.
 """
 
-from collections import abc as _abc
-from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf.internal import containers as _containers
-from kuksa_val_v2 import val2_types_pb2 as _val2_types_pb2
-import builtins as _builtins
-import sys
-import typing as _typing
+import builtins
+import collections.abc
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
+import kuksa_val_v2.val2_types_pb2
+import typing
 
-if sys.version_info >= (3, 11):
-    from typing import TypeAlias as _TypeAlias, Never as _Never
-else:
-    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-DESCRIPTOR: _descriptor.FileDescriptor
+@typing.final
+class GetValueRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-@_typing.final
-class GetValueRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
-
-    SIGNAL_ID_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def signal_id(self) -> _val2_types_pb2.SignalID: ...
+    SIGNAL_ID_FIELD_NUMBER: builtins.int
+    @property
+    def signal_id(self) -> kuksa_val_v2.val2_types_pb2.SignalID: ...
     def __init__(
         self,
         *,
-        signal_id: _val2_types_pb2.SignalID | None = ...,
+        signal_id: kuksa_val_v2.val2_types_pb2.SignalID | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["signal_id", b"signal_id"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["signal_id", b"signal_id"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def HasField(self, field_name: typing.Literal["signal_id", b"signal_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["signal_id", b"signal_id"]) -> None: ...
 
-Global___GetValueRequest: _TypeAlias = GetValueRequest  # noqa: Y015
+global___GetValueRequest = GetValueRequest
 
-@_typing.final
-class GetValueResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GetValueResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    DATA_POINT_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def data_point(self) -> _val2_types_pb2.Datapoint: ...
+    DATA_POINT_FIELD_NUMBER: builtins.int
+    @property
+    def data_point(self) -> kuksa_val_v2.val2_types_pb2.Datapoint: ...
     def __init__(
         self,
         *,
-        data_point: _val2_types_pb2.Datapoint | None = ...,
+        data_point: kuksa_val_v2.val2_types_pb2.Datapoint | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["data_point", b"data_point"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["data_point", b"data_point"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def HasField(self, field_name: typing.Literal["data_point", b"data_point"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["data_point", b"data_point"]) -> None: ...
 
-Global___GetValueResponse: _TypeAlias = GetValueResponse  # noqa: Y015
+global___GetValueResponse = GetValueResponse
 
-@_typing.final
-class GetValuesRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GetValuesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SIGNAL_IDS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def signal_ids(self) -> _containers.RepeatedCompositeFieldContainer[_val2_types_pb2.SignalID]: ...
+    SIGNAL_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def signal_ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[kuksa_val_v2.val2_types_pb2.SignalID]: ...
     def __init__(
         self,
         *,
-        signal_ids: _abc.Iterable[_val2_types_pb2.SignalID] | None = ...,
+        signal_ids: collections.abc.Iterable[kuksa_val_v2.val2_types_pb2.SignalID] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["signal_ids", b"signal_ids"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["signal_ids", b"signal_ids"]) -> None: ...
 
-Global___GetValuesRequest: _TypeAlias = GetValuesRequest  # noqa: Y015
+global___GetValuesRequest = GetValuesRequest
 
-@_typing.final
-class GetValuesResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GetValuesResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    DATA_POINTS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def data_points(self) -> _containers.RepeatedCompositeFieldContainer[_val2_types_pb2.Datapoint]: ...
+    DATA_POINTS_FIELD_NUMBER: builtins.int
+    @property
+    def data_points(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[kuksa_val_v2.val2_types_pb2.Datapoint]: ...
     def __init__(
         self,
         *,
-        data_points: _abc.Iterable[_val2_types_pb2.Datapoint] | None = ...,
+        data_points: collections.abc.Iterable[kuksa_val_v2.val2_types_pb2.Datapoint] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["data_points", b"data_points"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["data_points", b"data_points"]) -> None: ...
 
-Global___GetValuesResponse: _TypeAlias = GetValuesResponse  # noqa: Y015
+global___GetValuesResponse = GetValuesResponse
 
-@_typing.final
-class SubscribeRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SubscribeRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SIGNAL_PATHS_FIELD_NUMBER: _builtins.int
-    BUFFER_SIZE_FIELD_NUMBER: _builtins.int
-    FILTER_FIELD_NUMBER: _builtins.int
-    buffer_size: _builtins.int
-    @_builtins.property
-    def signal_paths(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
-    @_builtins.property
-    def filter(self) -> _val2_types_pb2.Filter: ...
+    SIGNAL_PATHS_FIELD_NUMBER: builtins.int
+    BUFFER_SIZE_FIELD_NUMBER: builtins.int
+    FILTER_FIELD_NUMBER: builtins.int
+    buffer_size: builtins.int
+    @property
+    def signal_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @property
+    def filter(self) -> kuksa_val_v2.val2_types_pb2.Filter: ...
     def __init__(
         self,
         *,
-        signal_paths: _abc.Iterable[_builtins.str] | None = ...,
-        buffer_size: _builtins.int = ...,
-        filter: _val2_types_pb2.Filter | None = ...,
+        signal_paths: collections.abc.Iterable[builtins.str] | None = ...,
+        buffer_size: builtins.int = ...,
+        filter: kuksa_val_v2.val2_types_pb2.Filter | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["filter", b"filter"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["buffer_size", b"buffer_size", "filter", b"filter", "signal_paths", b"signal_paths"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def HasField(self, field_name: typing.Literal["filter", b"filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["buffer_size", b"buffer_size", "filter", b"filter", "signal_paths", b"signal_paths"]) -> None: ...
 
-Global___SubscribeRequest: _TypeAlias = SubscribeRequest  # noqa: Y015
+global___SubscribeRequest = SubscribeRequest
 
-@_typing.final
-class SubscribeResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SubscribeResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class EntriesEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class EntriesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: _builtins.int
-        VALUE_FIELD_NUMBER: _builtins.int
-        key: _builtins.str
-        @_builtins.property
-        def value(self) -> _val2_types_pb2.Datapoint: ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> kuksa_val_v2.val2_types_pb2.Datapoint: ...
         def __init__(
             self,
             *,
-            key: _builtins.str = ...,
-            value: _val2_types_pb2.Datapoint | None = ...,
+            key: builtins.str = ...,
+            value: kuksa_val_v2.val2_types_pb2.Datapoint | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        def WhichOneof(self, oneof_group: _Never) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    ENTRIES_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def entries(self) -> _containers.MessageMap[_builtins.str, _val2_types_pb2.Datapoint]: ...
+    ENTRIES_FIELD_NUMBER: builtins.int
+    @property
+    def entries(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, kuksa_val_v2.val2_types_pb2.Datapoint]: ...
     def __init__(
         self,
         *,
-        entries: _abc.Mapping[_builtins.str, _val2_types_pb2.Datapoint] | None = ...,
+        entries: collections.abc.Mapping[builtins.str, kuksa_val_v2.val2_types_pb2.Datapoint] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["entries", b"entries"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["entries", b"entries"]) -> None: ...
 
-Global___SubscribeResponse: _TypeAlias = SubscribeResponse  # noqa: Y015
+global___SubscribeResponse = SubscribeResponse
 
-@_typing.final
-class SubscribeByIdRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SubscribeByIdRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SIGNAL_IDS_FIELD_NUMBER: _builtins.int
-    BUFFER_SIZE_FIELD_NUMBER: _builtins.int
-    FILTER_FIELD_NUMBER: _builtins.int
-    buffer_size: _builtins.int
-    @_builtins.property
-    def signal_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
-    @_builtins.property
-    def filter(self) -> _val2_types_pb2.Filter: ...
+    SIGNAL_IDS_FIELD_NUMBER: builtins.int
+    BUFFER_SIZE_FIELD_NUMBER: builtins.int
+    FILTER_FIELD_NUMBER: builtins.int
+    buffer_size: builtins.int
+    @property
+    def signal_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    @property
+    def filter(self) -> kuksa_val_v2.val2_types_pb2.Filter: ...
     def __init__(
         self,
         *,
-        signal_ids: _abc.Iterable[_builtins.int] | None = ...,
-        buffer_size: _builtins.int = ...,
-        filter: _val2_types_pb2.Filter | None = ...,
+        signal_ids: collections.abc.Iterable[builtins.int] | None = ...,
+        buffer_size: builtins.int = ...,
+        filter: kuksa_val_v2.val2_types_pb2.Filter | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["filter", b"filter"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["buffer_size", b"buffer_size", "filter", b"filter", "signal_ids", b"signal_ids"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def HasField(self, field_name: typing.Literal["filter", b"filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["buffer_size", b"buffer_size", "filter", b"filter", "signal_ids", b"signal_ids"]) -> None: ...
 
-Global___SubscribeByIdRequest: _TypeAlias = SubscribeByIdRequest  # noqa: Y015
+global___SubscribeByIdRequest = SubscribeByIdRequest
 
-@_typing.final
-class SubscribeByIdResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class SubscribeByIdResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class EntriesEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class EntriesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: _builtins.int
-        VALUE_FIELD_NUMBER: _builtins.int
-        key: _builtins.int
-        @_builtins.property
-        def value(self) -> _val2_types_pb2.Datapoint: ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.int
+        @property
+        def value(self) -> kuksa_val_v2.val2_types_pb2.Datapoint: ...
         def __init__(
             self,
             *,
-            key: _builtins.int = ...,
-            value: _val2_types_pb2.Datapoint | None = ...,
+            key: builtins.int = ...,
+            value: kuksa_val_v2.val2_types_pb2.Datapoint | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        def WhichOneof(self, oneof_group: _Never) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    ENTRIES_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def entries(self) -> _containers.MessageMap[_builtins.int, _val2_types_pb2.Datapoint]: ...
+    ENTRIES_FIELD_NUMBER: builtins.int
+    @property
+    def entries(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, kuksa_val_v2.val2_types_pb2.Datapoint]: ...
     def __init__(
         self,
         *,
-        entries: _abc.Mapping[_builtins.int, _val2_types_pb2.Datapoint] | None = ...,
+        entries: collections.abc.Mapping[builtins.int, kuksa_val_v2.val2_types_pb2.Datapoint] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["entries", b"entries"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["entries", b"entries"]) -> None: ...
 
-Global___SubscribeByIdResponse: _TypeAlias = SubscribeByIdResponse  # noqa: Y015
+global___SubscribeByIdResponse = SubscribeByIdResponse
 
-@_typing.final
-class ActuateRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ActuateRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SIGNAL_ID_FIELD_NUMBER: _builtins.int
-    VALUE_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def signal_id(self) -> _val2_types_pb2.SignalID: ...
-    @_builtins.property
-    def value(self) -> _val2_types_pb2.Value: ...
+    SIGNAL_ID_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    @property
+    def signal_id(self) -> kuksa_val_v2.val2_types_pb2.SignalID: ...
+    @property
+    def value(self) -> kuksa_val_v2.val2_types_pb2.Value: ...
     def __init__(
         self,
         *,
-        signal_id: _val2_types_pb2.SignalID | None = ...,
-        value: _val2_types_pb2.Value | None = ...,
+        signal_id: kuksa_val_v2.val2_types_pb2.SignalID | None = ...,
+        value: kuksa_val_v2.val2_types_pb2.Value | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["signal_id", b"signal_id", "value", b"value"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["signal_id", b"signal_id", "value", b"value"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def HasField(self, field_name: typing.Literal["signal_id", b"signal_id", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["signal_id", b"signal_id", "value", b"value"]) -> None: ...
 
-Global___ActuateRequest: _TypeAlias = ActuateRequest  # noqa: Y015
+global___ActuateRequest = ActuateRequest
 
-@_typing.final
-class ActuateResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ActuateResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-Global___ActuateResponse: _TypeAlias = ActuateResponse  # noqa: Y015
+global___ActuateResponse = ActuateResponse
 
-@_typing.final
-class BatchActuateRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class BatchActuateRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ACTUATE_REQUESTS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def actuate_requests(self) -> _containers.RepeatedCompositeFieldContainer[Global___ActuateRequest]: ...
+    ACTUATE_REQUESTS_FIELD_NUMBER: builtins.int
+    @property
+    def actuate_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ActuateRequest]: ...
     def __init__(
         self,
         *,
-        actuate_requests: _abc.Iterable[Global___ActuateRequest] | None = ...,
+        actuate_requests: collections.abc.Iterable[global___ActuateRequest] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["actuate_requests", b"actuate_requests"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["actuate_requests", b"actuate_requests"]) -> None: ...
 
-Global___BatchActuateRequest: _TypeAlias = BatchActuateRequest  # noqa: Y015
+global___BatchActuateRequest = BatchActuateRequest
 
-@_typing.final
-class BatchActuateResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class BatchActuateResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-Global___BatchActuateResponse: _TypeAlias = BatchActuateResponse  # noqa: Y015
+global___BatchActuateResponse = BatchActuateResponse
 
-@_typing.final
-class ListMetadataRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ListMetadataRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ROOT_FIELD_NUMBER: _builtins.int
-    FILTER_FIELD_NUMBER: _builtins.int
-    root: _builtins.str
-    filter: _builtins.str
+    ROOT_FIELD_NUMBER: builtins.int
+    FILTER_FIELD_NUMBER: builtins.int
+    root: builtins.str
+    filter: builtins.str
     def __init__(
         self,
         *,
-        root: _builtins.str = ...,
-        filter: _builtins.str = ...,
+        root: builtins.str = ...,
+        filter: builtins.str = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["filter", b"filter", "root", b"root"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["filter", b"filter", "root", b"root"]) -> None: ...
 
-Global___ListMetadataRequest: _TypeAlias = ListMetadataRequest  # noqa: Y015
+global___ListMetadataRequest = ListMetadataRequest
 
-@_typing.final
-class ListMetadataResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ListMetadataResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    METADATA_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def metadata(self) -> _containers.RepeatedCompositeFieldContainer[_val2_types_pb2.Metadata]: ...
+    METADATA_FIELD_NUMBER: builtins.int
+    @property
+    def metadata(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[kuksa_val_v2.val2_types_pb2.Metadata]: ...
     def __init__(
         self,
         *,
-        metadata: _abc.Iterable[_val2_types_pb2.Metadata] | None = ...,
+        metadata: collections.abc.Iterable[kuksa_val_v2.val2_types_pb2.Metadata] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["metadata", b"metadata"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["metadata", b"metadata"]) -> None: ...
 
-Global___ListMetadataResponse: _TypeAlias = ListMetadataResponse  # noqa: Y015
+global___ListMetadataResponse = ListMetadataResponse
 
-@_typing.final
-class PublishValueRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class PublishValueRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SIGNAL_ID_FIELD_NUMBER: _builtins.int
-    DATA_POINT_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def signal_id(self) -> _val2_types_pb2.SignalID: ...
-    @_builtins.property
-    def data_point(self) -> _val2_types_pb2.Datapoint: ...
+    SIGNAL_ID_FIELD_NUMBER: builtins.int
+    DATA_POINT_FIELD_NUMBER: builtins.int
+    @property
+    def signal_id(self) -> kuksa_val_v2.val2_types_pb2.SignalID: ...
+    @property
+    def data_point(self) -> kuksa_val_v2.val2_types_pb2.Datapoint: ...
     def __init__(
         self,
         *,
-        signal_id: _val2_types_pb2.SignalID | None = ...,
-        data_point: _val2_types_pb2.Datapoint | None = ...,
+        signal_id: kuksa_val_v2.val2_types_pb2.SignalID | None = ...,
+        data_point: kuksa_val_v2.val2_types_pb2.Datapoint | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["data_point", b"data_point", "signal_id", b"signal_id"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["data_point", b"data_point", "signal_id", b"signal_id"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def HasField(self, field_name: typing.Literal["data_point", b"data_point", "signal_id", b"signal_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["data_point", b"data_point", "signal_id", b"signal_id"]) -> None: ...
 
-Global___PublishValueRequest: _TypeAlias = PublishValueRequest  # noqa: Y015
+global___PublishValueRequest = PublishValueRequest
 
-@_typing.final
-class PublishValueResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class PublishValueResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-Global___PublishValueResponse: _TypeAlias = PublishValueResponse  # noqa: Y015
+global___PublishValueResponse = PublishValueResponse
 
-@_typing.final
-class PublishValuesRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class PublishValuesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class DataPointsEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class DataPointsEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: _builtins.int
-        VALUE_FIELD_NUMBER: _builtins.int
-        key: _builtins.int
-        @_builtins.property
-        def value(self) -> _val2_types_pb2.Datapoint: ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.int
+        @property
+        def value(self) -> kuksa_val_v2.val2_types_pb2.Datapoint: ...
         def __init__(
             self,
             *,
-            key: _builtins.int = ...,
-            value: _val2_types_pb2.Datapoint | None = ...,
+            key: builtins.int = ...,
+            value: kuksa_val_v2.val2_types_pb2.Datapoint | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        def WhichOneof(self, oneof_group: _Never) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    REQUEST_ID_FIELD_NUMBER: _builtins.int
-    DATA_POINTS_FIELD_NUMBER: _builtins.int
-    request_id: _builtins.int
-    @_builtins.property
-    def data_points(self) -> _containers.MessageMap[_builtins.int, _val2_types_pb2.Datapoint]: ...
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    DATA_POINTS_FIELD_NUMBER: builtins.int
+    request_id: builtins.int
+    @property
+    def data_points(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, kuksa_val_v2.val2_types_pb2.Datapoint]: ...
     def __init__(
         self,
         *,
-        request_id: _builtins.int = ...,
-        data_points: _abc.Mapping[_builtins.int, _val2_types_pb2.Datapoint] | None = ...,
+        request_id: builtins.int = ...,
+        data_points: collections.abc.Mapping[builtins.int, kuksa_val_v2.val2_types_pb2.Datapoint] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["data_points", b"data_points", "request_id", b"request_id"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["data_points", b"data_points", "request_id", b"request_id"]) -> None: ...
 
-Global___PublishValuesRequest: _TypeAlias = PublishValuesRequest  # noqa: Y015
+global___PublishValuesRequest = PublishValuesRequest
 
-@_typing.final
-class PublishValuesResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class PublishValuesResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class StatusEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class StatusEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: _builtins.int
-        VALUE_FIELD_NUMBER: _builtins.int
-        key: _builtins.int
-        @_builtins.property
-        def value(self) -> _val2_types_pb2.Error: ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.int
+        @property
+        def value(self) -> kuksa_val_v2.val2_types_pb2.Error: ...
         def __init__(
             self,
             *,
-            key: _builtins.int = ...,
-            value: _val2_types_pb2.Error | None = ...,
+            key: builtins.int = ...,
+            value: kuksa_val_v2.val2_types_pb2.Error | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        def WhichOneof(self, oneof_group: _Never) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    REQUEST_ID_FIELD_NUMBER: _builtins.int
-    STATUS_FIELD_NUMBER: _builtins.int
-    request_id: _builtins.int
-    @_builtins.property
-    def status(self) -> _containers.MessageMap[_builtins.int, _val2_types_pb2.Error]: ...
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    request_id: builtins.int
+    @property
+    def status(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, kuksa_val_v2.val2_types_pb2.Error]: ...
     def __init__(
         self,
         *,
-        request_id: _builtins.int = ...,
-        status: _abc.Mapping[_builtins.int, _val2_types_pb2.Error] | None = ...,
+        request_id: builtins.int = ...,
+        status: collections.abc.Mapping[builtins.int, kuksa_val_v2.val2_types_pb2.Error] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["request_id", b"request_id", "status", b"status"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["request_id", b"request_id", "status", b"status"]) -> None: ...
 
-Global___PublishValuesResponse: _TypeAlias = PublishValuesResponse  # noqa: Y015
+global___PublishValuesResponse = PublishValuesResponse
 
-@_typing.final
-class ProvideActuationRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ProvideActuationRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ACTUATOR_IDENTIFIERS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def actuator_identifiers(self) -> _containers.RepeatedCompositeFieldContainer[_val2_types_pb2.SignalID]: ...
+    ACTUATOR_IDENTIFIERS_FIELD_NUMBER: builtins.int
+    @property
+    def actuator_identifiers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[kuksa_val_v2.val2_types_pb2.SignalID]: ...
     def __init__(
         self,
         *,
-        actuator_identifiers: _abc.Iterable[_val2_types_pb2.SignalID] | None = ...,
+        actuator_identifiers: collections.abc.Iterable[kuksa_val_v2.val2_types_pb2.SignalID] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["actuator_identifiers", b"actuator_identifiers"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["actuator_identifiers", b"actuator_identifiers"]) -> None: ...
 
-Global___ProvideActuationRequest: _TypeAlias = ProvideActuationRequest  # noqa: Y015
+global___ProvideActuationRequest = ProvideActuationRequest
 
-@_typing.final
-class ProvideActuationResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ProvideActuationResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-Global___ProvideActuationResponse: _TypeAlias = ProvideActuationResponse  # noqa: Y015
+global___ProvideActuationResponse = ProvideActuationResponse
 
-@_typing.final
-class ProvideSignalRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ProvideSignalRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class SignalsSampleIntervalsEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class SignalsSampleIntervalsEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: _builtins.int
-        VALUE_FIELD_NUMBER: _builtins.int
-        key: _builtins.int
-        @_builtins.property
-        def value(self) -> _val2_types_pb2.SampleInterval: ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.int
+        @property
+        def value(self) -> kuksa_val_v2.val2_types_pb2.SampleInterval: ...
         def __init__(
             self,
             *,
-            key: _builtins.int = ...,
-            value: _val2_types_pb2.SampleInterval | None = ...,
+            key: builtins.int = ...,
+            value: kuksa_val_v2.val2_types_pb2.SampleInterval | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        def WhichOneof(self, oneof_group: _Never) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    SIGNALS_SAMPLE_INTERVALS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def signals_sample_intervals(self) -> _containers.MessageMap[_builtins.int, _val2_types_pb2.SampleInterval]: ...
+    SIGNALS_SAMPLE_INTERVALS_FIELD_NUMBER: builtins.int
+    @property
+    def signals_sample_intervals(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, kuksa_val_v2.val2_types_pb2.SampleInterval]: ...
     def __init__(
         self,
         *,
-        signals_sample_intervals: _abc.Mapping[_builtins.int, _val2_types_pb2.SampleInterval] | None = ...,
+        signals_sample_intervals: collections.abc.Mapping[builtins.int, kuksa_val_v2.val2_types_pb2.SampleInterval] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["signals_sample_intervals", b"signals_sample_intervals"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["signals_sample_intervals", b"signals_sample_intervals"]) -> None: ...
 
-Global___ProvideSignalRequest: _TypeAlias = ProvideSignalRequest  # noqa: Y015
+global___ProvideSignalRequest = ProvideSignalRequest
 
-@_typing.final
-class ProvideSignalResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ProvideSignalResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-Global___ProvideSignalResponse: _TypeAlias = ProvideSignalResponse  # noqa: Y015
+global___ProvideSignalResponse = ProvideSignalResponse
 
-@_typing.final
-class BatchActuateStreamRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class BatchActuateStreamRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ACTUATE_REQUESTS_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def actuate_requests(self) -> _containers.RepeatedCompositeFieldContainer[Global___ActuateRequest]: ...
+    ACTUATE_REQUESTS_FIELD_NUMBER: builtins.int
+    @property
+    def actuate_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ActuateRequest]: ...
     def __init__(
         self,
         *,
-        actuate_requests: _abc.Iterable[Global___ActuateRequest] | None = ...,
+        actuate_requests: collections.abc.Iterable[global___ActuateRequest] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["actuate_requests", b"actuate_requests"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["actuate_requests", b"actuate_requests"]) -> None: ...
 
-Global___BatchActuateStreamRequest: _TypeAlias = BatchActuateStreamRequest  # noqa: Y015
+global___BatchActuateStreamRequest = BatchActuateStreamRequest
 
-@_typing.final
-class BatchActuateStreamResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class BatchActuateStreamResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SIGNAL_ID_FIELD_NUMBER: _builtins.int
-    ERROR_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def signal_id(self) -> _val2_types_pb2.SignalID: ...
-    @_builtins.property
-    def error(self) -> _val2_types_pb2.Error: ...
+    SIGNAL_ID_FIELD_NUMBER: builtins.int
+    ERROR_FIELD_NUMBER: builtins.int
+    @property
+    def signal_id(self) -> kuksa_val_v2.val2_types_pb2.SignalID: ...
+    @property
+    def error(self) -> kuksa_val_v2.val2_types_pb2.Error: ...
     def __init__(
         self,
         *,
-        signal_id: _val2_types_pb2.SignalID | None = ...,
-        error: _val2_types_pb2.Error | None = ...,
+        signal_id: kuksa_val_v2.val2_types_pb2.SignalID | None = ...,
+        error: kuksa_val_v2.val2_types_pb2.Error | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["error", b"error", "signal_id", b"signal_id"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["error", b"error", "signal_id", b"signal_id"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def HasField(self, field_name: typing.Literal["error", b"error", "signal_id", b"signal_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["error", b"error", "signal_id", b"signal_id"]) -> None: ...
 
-Global___BatchActuateStreamResponse: _TypeAlias = BatchActuateStreamResponse  # noqa: Y015
+global___BatchActuateStreamResponse = BatchActuateStreamResponse
 
-@_typing.final
-class UpdateFilterRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class UpdateFilterRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class FiltersUpdateEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class FiltersUpdateEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: _builtins.int
-        VALUE_FIELD_NUMBER: _builtins.int
-        key: _builtins.int
-        @_builtins.property
-        def value(self) -> _val2_types_pb2.Filter: ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.int
+        @property
+        def value(self) -> kuksa_val_v2.val2_types_pb2.Filter: ...
         def __init__(
             self,
             *,
-            key: _builtins.int = ...,
-            value: _val2_types_pb2.Filter | None = ...,
+            key: builtins.int = ...,
+            value: kuksa_val_v2.val2_types_pb2.Filter | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        def WhichOneof(self, oneof_group: _Never) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    REQUEST_ID_FIELD_NUMBER: _builtins.int
-    FILTERS_UPDATE_FIELD_NUMBER: _builtins.int
-    request_id: _builtins.int
-    @_builtins.property
-    def filters_update(self) -> _containers.MessageMap[_builtins.int, _val2_types_pb2.Filter]: ...
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    FILTERS_UPDATE_FIELD_NUMBER: builtins.int
+    request_id: builtins.int
+    @property
+    def filters_update(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, kuksa_val_v2.val2_types_pb2.Filter]: ...
     def __init__(
         self,
         *,
-        request_id: _builtins.int = ...,
-        filters_update: _abc.Mapping[_builtins.int, _val2_types_pb2.Filter] | None = ...,
+        request_id: builtins.int = ...,
+        filters_update: collections.abc.Mapping[builtins.int, kuksa_val_v2.val2_types_pb2.Filter] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["filters_update", b"filters_update", "request_id", b"request_id"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["filters_update", b"filters_update", "request_id", b"request_id"]) -> None: ...
 
-Global___UpdateFilterRequest: _TypeAlias = UpdateFilterRequest  # noqa: Y015
+global___UpdateFilterRequest = UpdateFilterRequest
 
-@_typing.final
-class UpdateFilterResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class UpdateFilterResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    REQUEST_ID_FIELD_NUMBER: _builtins.int
-    FILTER_ERROR_FIELD_NUMBER: _builtins.int
-    request_id: _builtins.int
-    filter_error: _val2_types_pb2.FilterError.ValueType
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    FILTER_ERROR_FIELD_NUMBER: builtins.int
+    request_id: builtins.int
+    filter_error: kuksa_val_v2.val2_types_pb2.FilterError.ValueType
     def __init__(
         self,
         *,
-        request_id: _builtins.int = ...,
-        filter_error: _val2_types_pb2.FilterError.ValueType = ...,
+        request_id: builtins.int = ...,
+        filter_error: kuksa_val_v2.val2_types_pb2.FilterError.ValueType = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["filter_error", b"filter_error", "request_id", b"request_id"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["filter_error", b"filter_error", "request_id", b"request_id"]) -> None: ...
 
-Global___UpdateFilterResponse: _TypeAlias = UpdateFilterResponse  # noqa: Y015
+global___UpdateFilterResponse = UpdateFilterResponse
 
-@_typing.final
-class ProviderErrorIndication(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class ProviderErrorIndication(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PROVIDER_ERROR_FIELD_NUMBER: _builtins.int
-    provider_error: _val2_types_pb2.ProviderError.ValueType
+    PROVIDER_ERROR_FIELD_NUMBER: builtins.int
+    provider_error: kuksa_val_v2.val2_types_pb2.ProviderError.ValueType
     def __init__(
         self,
         *,
-        provider_error: _val2_types_pb2.ProviderError.ValueType = ...,
+        provider_error: kuksa_val_v2.val2_types_pb2.ProviderError.ValueType = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["provider_error", b"provider_error"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["provider_error", b"provider_error"]) -> None: ...
 
-Global___ProviderErrorIndication: _TypeAlias = ProviderErrorIndication  # noqa: Y015
+global___ProviderErrorIndication = ProviderErrorIndication
 
-@_typing.final
-class GetProviderValueRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GetProviderValueRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    REQUEST_ID_FIELD_NUMBER: _builtins.int
-    SIGNAL_IDS_FIELD_NUMBER: _builtins.int
-    request_id: _builtins.int
-    @_builtins.property
-    def signal_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    SIGNAL_IDS_FIELD_NUMBER: builtins.int
+    request_id: builtins.int
+    @property
+    def signal_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     def __init__(
         self,
         *,
-        request_id: _builtins.int = ...,
-        signal_ids: _abc.Iterable[_builtins.int] | None = ...,
+        request_id: builtins.int = ...,
+        signal_ids: collections.abc.Iterable[builtins.int] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["request_id", b"request_id", "signal_ids", b"signal_ids"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["request_id", b"request_id", "signal_ids", b"signal_ids"]) -> None: ...
 
-Global___GetProviderValueRequest: _TypeAlias = GetProviderValueRequest  # noqa: Y015
+global___GetProviderValueRequest = GetProviderValueRequest
 
-@_typing.final
-class GetProviderValueResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GetProviderValueResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @_typing.final
-    class EntriesEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+    @typing.final
+    class EntriesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: _builtins.int
-        VALUE_FIELD_NUMBER: _builtins.int
-        key: _builtins.int
-        @_builtins.property
-        def value(self) -> _val2_types_pb2.Datapoint: ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.int
+        @property
+        def value(self) -> kuksa_val_v2.val2_types_pb2.Datapoint: ...
         def __init__(
             self,
             *,
-            key: _builtins.int = ...,
-            value: _val2_types_pb2.Datapoint | None = ...,
+            key: builtins.int = ...,
+            value: kuksa_val_v2.val2_types_pb2.Datapoint | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
-        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        def WhichOneof(self, oneof_group: _Never) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    REQUEST_ID_FIELD_NUMBER: _builtins.int
-    ENTRIES_FIELD_NUMBER: _builtins.int
-    request_id: _builtins.int
-    @_builtins.property
-    def entries(self) -> _containers.MessageMap[_builtins.int, _val2_types_pb2.Datapoint]: ...
+    REQUEST_ID_FIELD_NUMBER: builtins.int
+    ENTRIES_FIELD_NUMBER: builtins.int
+    request_id: builtins.int
+    @property
+    def entries(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, kuksa_val_v2.val2_types_pb2.Datapoint]: ...
     def __init__(
         self,
         *,
-        request_id: _builtins.int = ...,
-        entries: _abc.Mapping[_builtins.int, _val2_types_pb2.Datapoint] | None = ...,
+        request_id: builtins.int = ...,
+        entries: collections.abc.Mapping[builtins.int, kuksa_val_v2.val2_types_pb2.Datapoint] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["entries", b"entries", "request_id", b"request_id"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["entries", b"entries", "request_id", b"request_id"]) -> None: ...
 
-Global___GetProviderValueResponse: _TypeAlias = GetProviderValueResponse  # noqa: Y015
+global___GetProviderValueResponse = GetProviderValueResponse
 
-@_typing.final
-class OpenProviderStreamRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class OpenProviderStreamRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PROVIDE_ACTUATION_REQUEST_FIELD_NUMBER: _builtins.int
-    PUBLISH_VALUES_REQUEST_FIELD_NUMBER: _builtins.int
-    BATCH_ACTUATE_STREAM_RESPONSE_FIELD_NUMBER: _builtins.int
-    PROVIDE_SIGNAL_REQUEST_FIELD_NUMBER: _builtins.int
-    UPDATE_FILTER_RESPONSE_FIELD_NUMBER: _builtins.int
-    GET_PROVIDER_VALUE_RESPONSE_FIELD_NUMBER: _builtins.int
-    PROVIDER_ERROR_INDICATION_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def provide_actuation_request(self) -> Global___ProvideActuationRequest: ...
-    @_builtins.property
-    def publish_values_request(self) -> Global___PublishValuesRequest: ...
-    @_builtins.property
-    def batch_actuate_stream_response(self) -> Global___BatchActuateStreamResponse: ...
-    @_builtins.property
-    def provide_signal_request(self) -> Global___ProvideSignalRequest: ...
-    @_builtins.property
-    def update_filter_response(self) -> Global___UpdateFilterResponse: ...
-    @_builtins.property
-    def get_provider_value_response(self) -> Global___GetProviderValueResponse: ...
-    @_builtins.property
-    def provider_error_indication(self) -> Global___ProviderErrorIndication: ...
+    PROVIDE_ACTUATION_REQUEST_FIELD_NUMBER: builtins.int
+    PUBLISH_VALUES_REQUEST_FIELD_NUMBER: builtins.int
+    BATCH_ACTUATE_STREAM_RESPONSE_FIELD_NUMBER: builtins.int
+    PROVIDE_SIGNAL_REQUEST_FIELD_NUMBER: builtins.int
+    UPDATE_FILTER_RESPONSE_FIELD_NUMBER: builtins.int
+    GET_PROVIDER_VALUE_RESPONSE_FIELD_NUMBER: builtins.int
+    PROVIDER_ERROR_INDICATION_FIELD_NUMBER: builtins.int
+    @property
+    def provide_actuation_request(self) -> global___ProvideActuationRequest: ...
+    @property
+    def publish_values_request(self) -> global___PublishValuesRequest: ...
+    @property
+    def batch_actuate_stream_response(self) -> global___BatchActuateStreamResponse: ...
+    @property
+    def provide_signal_request(self) -> global___ProvideSignalRequest: ...
+    @property
+    def update_filter_response(self) -> global___UpdateFilterResponse: ...
+    @property
+    def get_provider_value_response(self) -> global___GetProviderValueResponse: ...
+    @property
+    def provider_error_indication(self) -> global___ProviderErrorIndication: ...
     def __init__(
         self,
         *,
-        provide_actuation_request: Global___ProvideActuationRequest | None = ...,
-        publish_values_request: Global___PublishValuesRequest | None = ...,
-        batch_actuate_stream_response: Global___BatchActuateStreamResponse | None = ...,
-        provide_signal_request: Global___ProvideSignalRequest | None = ...,
-        update_filter_response: Global___UpdateFilterResponse | None = ...,
-        get_provider_value_response: Global___GetProviderValueResponse | None = ...,
-        provider_error_indication: Global___ProviderErrorIndication | None = ...,
+        provide_actuation_request: global___ProvideActuationRequest | None = ...,
+        publish_values_request: global___PublishValuesRequest | None = ...,
+        batch_actuate_stream_response: global___BatchActuateStreamResponse | None = ...,
+        provide_signal_request: global___ProvideSignalRequest | None = ...,
+        update_filter_response: global___UpdateFilterResponse | None = ...,
+        get_provider_value_response: global___GetProviderValueResponse | None = ...,
+        provider_error_indication: global___ProviderErrorIndication | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "batch_actuate_stream_response", b"batch_actuate_stream_response", "get_provider_value_response", b"get_provider_value_response", "provide_actuation_request", b"provide_actuation_request", "provide_signal_request", b"provide_signal_request", "provider_error_indication", b"provider_error_indication", "publish_values_request", b"publish_values_request", "update_filter_response", b"update_filter_response"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "batch_actuate_stream_response", b"batch_actuate_stream_response", "get_provider_value_response", b"get_provider_value_response", "provide_actuation_request", b"provide_actuation_request", "provide_signal_request", b"provide_signal_request", "provider_error_indication", b"provider_error_indication", "publish_values_request", b"publish_values_request", "update_filter_response", b"update_filter_response"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_action: _TypeAlias = _typing.Literal["provide_actuation_request", "publish_values_request", "batch_actuate_stream_response", "provide_signal_request", "update_filter_response", "get_provider_value_response", "provider_error_indication"]  # noqa: Y015
-    _WhichOneofArgType_action: _TypeAlias = _typing.Literal["action", b"action"]  # noqa: Y015
-    def WhichOneof(self, oneof_group: _WhichOneofArgType_action) -> _WhichOneofReturnType_action | None: ...
+    def HasField(self, field_name: typing.Literal["action", b"action", "batch_actuate_stream_response", b"batch_actuate_stream_response", "get_provider_value_response", b"get_provider_value_response", "provide_actuation_request", b"provide_actuation_request", "provide_signal_request", b"provide_signal_request", "provider_error_indication", b"provider_error_indication", "publish_values_request", b"publish_values_request", "update_filter_response", b"update_filter_response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "batch_actuate_stream_response", b"batch_actuate_stream_response", "get_provider_value_response", b"get_provider_value_response", "provide_actuation_request", b"provide_actuation_request", "provide_signal_request", b"provide_signal_request", "provider_error_indication", b"provider_error_indication", "publish_values_request", b"publish_values_request", "update_filter_response", b"update_filter_response"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["action", b"action"]) -> typing.Literal["provide_actuation_request", "publish_values_request", "batch_actuate_stream_response", "provide_signal_request", "update_filter_response", "get_provider_value_response", "provider_error_indication"] | None: ...
 
-Global___OpenProviderStreamRequest: _TypeAlias = OpenProviderStreamRequest  # noqa: Y015
+global___OpenProviderStreamRequest = OpenProviderStreamRequest
 
-@_typing.final
-class OpenProviderStreamResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class OpenProviderStreamResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PROVIDE_ACTUATION_RESPONSE_FIELD_NUMBER: _builtins.int
-    PUBLISH_VALUES_RESPONSE_FIELD_NUMBER: _builtins.int
-    BATCH_ACTUATE_STREAM_REQUEST_FIELD_NUMBER: _builtins.int
-    PROVIDE_SIGNAL_RESPONSE_FIELD_NUMBER: _builtins.int
-    UPDATE_FILTER_REQUEST_FIELD_NUMBER: _builtins.int
-    GET_PROVIDER_VALUE_REQUEST_FIELD_NUMBER: _builtins.int
-    @_builtins.property
-    def provide_actuation_response(self) -> Global___ProvideActuationResponse: ...
-    @_builtins.property
-    def publish_values_response(self) -> Global___PublishValuesResponse: ...
-    @_builtins.property
-    def batch_actuate_stream_request(self) -> Global___BatchActuateStreamRequest: ...
-    @_builtins.property
-    def provide_signal_response(self) -> Global___ProvideSignalResponse: ...
-    @_builtins.property
-    def update_filter_request(self) -> Global___UpdateFilterRequest: ...
-    @_builtins.property
-    def get_provider_value_request(self) -> Global___GetProviderValueRequest: ...
+    PROVIDE_ACTUATION_RESPONSE_FIELD_NUMBER: builtins.int
+    PUBLISH_VALUES_RESPONSE_FIELD_NUMBER: builtins.int
+    BATCH_ACTUATE_STREAM_REQUEST_FIELD_NUMBER: builtins.int
+    PROVIDE_SIGNAL_RESPONSE_FIELD_NUMBER: builtins.int
+    UPDATE_FILTER_REQUEST_FIELD_NUMBER: builtins.int
+    GET_PROVIDER_VALUE_REQUEST_FIELD_NUMBER: builtins.int
+    @property
+    def provide_actuation_response(self) -> global___ProvideActuationResponse: ...
+    @property
+    def publish_values_response(self) -> global___PublishValuesResponse: ...
+    @property
+    def batch_actuate_stream_request(self) -> global___BatchActuateStreamRequest: ...
+    @property
+    def provide_signal_response(self) -> global___ProvideSignalResponse: ...
+    @property
+    def update_filter_request(self) -> global___UpdateFilterRequest: ...
+    @property
+    def get_provider_value_request(self) -> global___GetProviderValueRequest: ...
     def __init__(
         self,
         *,
-        provide_actuation_response: Global___ProvideActuationResponse | None = ...,
-        publish_values_response: Global___PublishValuesResponse | None = ...,
-        batch_actuate_stream_request: Global___BatchActuateStreamRequest | None = ...,
-        provide_signal_response: Global___ProvideSignalResponse | None = ...,
-        update_filter_request: Global___UpdateFilterRequest | None = ...,
-        get_provider_value_request: Global___GetProviderValueRequest | None = ...,
+        provide_actuation_response: global___ProvideActuationResponse | None = ...,
+        publish_values_response: global___PublishValuesResponse | None = ...,
+        batch_actuate_stream_request: global___BatchActuateStreamRequest | None = ...,
+        provide_signal_response: global___ProvideSignalResponse | None = ...,
+        update_filter_request: global___UpdateFilterRequest | None = ...,
+        get_provider_value_request: global___GetProviderValueRequest | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "batch_actuate_stream_request", b"batch_actuate_stream_request", "get_provider_value_request", b"get_provider_value_request", "provide_actuation_response", b"provide_actuation_response", "provide_signal_response", b"provide_signal_response", "publish_values_response", b"publish_values_response", "update_filter_request", b"update_filter_request"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "batch_actuate_stream_request", b"batch_actuate_stream_request", "get_provider_value_request", b"get_provider_value_request", "provide_actuation_response", b"provide_actuation_response", "provide_signal_response", b"provide_signal_response", "publish_values_response", b"publish_values_response", "update_filter_request", b"update_filter_request"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_action: _TypeAlias = _typing.Literal["provide_actuation_response", "publish_values_response", "batch_actuate_stream_request", "provide_signal_response", "update_filter_request", "get_provider_value_request"]  # noqa: Y015
-    _WhichOneofArgType_action: _TypeAlias = _typing.Literal["action", b"action"]  # noqa: Y015
-    def WhichOneof(self, oneof_group: _WhichOneofArgType_action) -> _WhichOneofReturnType_action | None: ...
+    def HasField(self, field_name: typing.Literal["action", b"action", "batch_actuate_stream_request", b"batch_actuate_stream_request", "get_provider_value_request", b"get_provider_value_request", "provide_actuation_response", b"provide_actuation_response", "provide_signal_response", b"provide_signal_response", "publish_values_response", b"publish_values_response", "update_filter_request", b"update_filter_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "batch_actuate_stream_request", b"batch_actuate_stream_request", "get_provider_value_request", b"get_provider_value_request", "provide_actuation_response", b"provide_actuation_response", "provide_signal_response", b"provide_signal_response", "publish_values_response", b"publish_values_response", "update_filter_request", b"update_filter_request"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["action", b"action"]) -> typing.Literal["provide_actuation_response", "publish_values_response", "batch_actuate_stream_request", "provide_signal_response", "update_filter_request", "get_provider_value_request"] | None: ...
 
-Global___OpenProviderStreamResponse: _TypeAlias = OpenProviderStreamResponse  # noqa: Y015
+global___OpenProviderStreamResponse = OpenProviderStreamResponse
 
-@_typing.final
-class GetServerInfoRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GetServerInfoRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-Global___GetServerInfoRequest: _TypeAlias = GetServerInfoRequest  # noqa: Y015
+global___GetServerInfoRequest = GetServerInfoRequest
 
-@_typing.final
-class GetServerInfoResponse(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+@typing.final
+class GetServerInfoResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: _builtins.int
-    VERSION_FIELD_NUMBER: _builtins.int
-    COMMIT_HASH_FIELD_NUMBER: _builtins.int
-    name: _builtins.str
-    version: _builtins.str
-    commit_hash: _builtins.str
+    NAME_FIELD_NUMBER: builtins.int
+    VERSION_FIELD_NUMBER: builtins.int
+    COMMIT_HASH_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    version: builtins.str
+    commit_hash: builtins.str
     def __init__(
         self,
         *,
-        name: _builtins.str = ...,
-        version: _builtins.str = ...,
-        commit_hash: _builtins.str = ...,
+        name: builtins.str = ...,
+        version: builtins.str = ...,
+        commit_hash: builtins.str = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["commit_hash", b"commit_hash", "name", b"name", "version", b"version"]  # noqa: Y015
-    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    def WhichOneof(self, oneof_group: _Never) -> None: ...
+    def ClearField(self, field_name: typing.Literal["commit_hash", b"commit_hash", "name", b"name", "version", b"version"]) -> None: ...
 
-Global___GetServerInfoResponse: _TypeAlias = GetServerInfoResponse  # noqa: Y015
+global___GetServerInfoResponse = GetServerInfoResponse

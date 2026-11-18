@@ -141,7 +141,7 @@ class DataPoint(Node):
             )
             if response.errors:
                 raise TypeError(
-                    f"set target value for non-actuator {path} is not allowed!"
+                    f"Failed to set {path}: {response.errors[path]}"
                 )
 
         except (grpc.aio.AioRpcError, Exception) as ex:  # type: ignore

@@ -18,6 +18,7 @@ legacy-compatible adapters."""
 import os
 from unittest import mock
 
+import grpc
 import pytest
 
 from velocitas_sdk import config
@@ -87,9 +88,12 @@ def test_parse_query_paths_strips_where_clause():
     assert paths == ["Vehicle.Speed", "Vehicle.ADAS.CruiseControl.SpeedSet"]
 
 
-def test_get_vdb_client_selects_backend_from_config():
+@pytest.mark.asyncio
+async def test_get_vdb_client_selects_backend_from_config():
     config.databroker_api = config.DATABROKER_API_KUKSA_VAL_V2
-    assert isinstance(get_vdb_client(), VehicleDataBrokerClientValV2)
+    client = get_vdb_client()
+    assert isinstance(client, VehicleDataBrokerClientValV2)
+    await client.close()
 
 
 @pytest.mark.asyncio
@@ -105,6 +109,20 @@ async def test_get_datapoints():
 
 
 @pytest.mark.asyncio
+async def test_get_datapoints_rejects_response_with_missing_entries():
+    client = VehicleDataBrokerClientValV2()
+    response = GetValuesResponse(data_points=[])
+    with mock.patch.object(
+        client._stub, "GetValues", new_callable=mock.AsyncMock, return_value=response
+    ):
+        with pytest.raises(RuntimeError, match="returned 0 data points for 1"):
+            await client.GetDatapoints(
+                ["Vehicle.Powertrain.Transmission.PerformanceMode"]
+            )
+    await client.close()
+
+
+@pytest.mark.asyncio
 async def test_get_metadata():
     client = VehicleDataBrokerClientValV2()
     response = ListMetadataResponse(metadata=[Metadata(path="Vehicle.Speed")])
@@ -116,4 +134,108 @@ async def test_get_metadata():
     ):
         result = await client.GetMetadata([])
         assert result.list[0].name == "Vehicle.Speed"
+    await client.close()
+
+
+def _rpc_error(code):
+    return grpc.aio.AioRpcError(
+        code, initial_metadata=(), trailing_metadata=(), details=str(code)
+    )
+
+
+@pytest.mark.asyncio
+async def test_set_datapoints_actuate_success():
+    client = VehicleDataBrokerClientValV2()
+    with (
+        mock.patch.object(
+            client._stub, "Actuate", new_callable=mock.AsyncMock
+        ) as actuate,
+        mock.patch.object(
+            client._stub, "PublishValue", new_callable=mock.AsyncMock
+        ) as publish_value,
+    ):
+        result = await client.SetDatapoints(
+            {
+                "Vehicle.Body.Windshield.Front.Wiping.Mode": BrokerDatapoint(
+                    string_value="ON"
+                )
+            }
+        )
+        assert not result.errors
+        actuate.assert_awaited_once()
+        publish_value.assert_not_awaited()
+    await client.close()
+
+
+@pytest.mark.asyncio
+async def test_set_datapoints_reports_invalid_argument_without_publish():
+    client = VehicleDataBrokerClientValV2()
+    with (
+        mock.patch.object(
+            client._stub,
+            "Actuate",
+            new_callable=mock.AsyncMock,
+            side_effect=_rpc_error(grpc.StatusCode.INVALID_ARGUMENT),
+        ),
+        mock.patch.object(
+            client._stub, "PublishValue", new_callable=mock.AsyncMock
+        ) as publish_value,
+    ):
+        result = await client.SetDatapoints(
+            {"Vehicle.Speed": BrokerDatapoint(float_value=1.0)}
+        )
+        assert result.errors["Vehicle.Speed"]
+        publish_value.assert_not_awaited()
+    await client.close()
+
+
+@pytest.mark.asyncio
+async def test_set_datapoints_reports_unavailable_without_publish():
+    client = VehicleDataBrokerClientValV2()
+    with (
+        mock.patch.object(
+            client._stub,
+            "Actuate",
+            new_callable=mock.AsyncMock,
+            side_effect=_rpc_error(grpc.StatusCode.UNAVAILABLE),
+        ),
+        mock.patch.object(
+            client._stub, "PublishValue", new_callable=mock.AsyncMock
+        ) as publish_value,
+    ):
+        result = await client.SetDatapoints(
+            {
+                "Vehicle.Powertrain.Transmission.PerformanceMode": BrokerDatapoint(
+                    string_value="SPORT"
+                )
+            }
+        )
+        assert result.errors["Vehicle.Powertrain.Transmission.PerformanceMode"]
+        publish_value.assert_not_awaited()
+    await client.close()
+
+
+@pytest.mark.asyncio
+async def test_set_datapoints_reports_permission_denied_without_fallback():
+    client = VehicleDataBrokerClientValV2()
+    with (
+        mock.patch.object(
+            client._stub,
+            "Actuate",
+            new_callable=mock.AsyncMock,
+            side_effect=_rpc_error(grpc.StatusCode.PERMISSION_DENIED),
+        ),
+        mock.patch.object(
+            client._stub, "PublishValue", new_callable=mock.AsyncMock
+        ) as publish_value,
+    ):
+        result = await client.SetDatapoints(
+            {
+                "Vehicle.Powertrain.Transmission.PerformanceMode": BrokerDatapoint(
+                    string_value="SPORT"
+                )
+            }
+        )
+        assert result.errors["Vehicle.Powertrain.Transmission.PerformanceMode"]
+        publish_value.assert_not_awaited()
     await client.close()

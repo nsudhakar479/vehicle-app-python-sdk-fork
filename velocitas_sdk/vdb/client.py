@@ -32,7 +32,6 @@ from velocitas_sdk.proto.val2_pb2 import (
     ActuateRequest,
     GetValuesRequest,
     ListMetadataRequest,
-    PublishValueRequest,
 )
 from velocitas_sdk.proto.val2_pb2 import SubscribeRequest as ValV2SubscribeRequest
 from velocitas_sdk.proto.val2_pb2_grpc import VALStub
@@ -48,10 +47,6 @@ from velocitas_sdk.proto.val2_types_pb2 import (
     Uint64Array,
     Value,
 )
-from velocitas_sdk.proto.val2_types_pb2 import (
-    Datapoint as Val2Datapoint,
-)
-
 logger = logging.getLogger(__name__)
 
 
@@ -331,6 +326,12 @@ class VehicleDataBrokerClientValV2:
             response = await self._stub.GetValues(
                 GetValuesRequest(signal_ids=signal_ids), metadata=self._metadata
             )
+            if len(response.data_points) != len(datapoints):
+                raise RuntimeError(
+                    "VAL v2 GetValues returned "
+                    f"{len(response.data_points)} data points for "
+                    f"{len(datapoints)} requested signals"
+                )
             result = {
                 path: _Val2DatapointAdapter(data_point)
                 for path, data_point in zip(datapoints, response.data_points)
@@ -346,24 +347,23 @@ class VehicleDataBrokerClientValV2:
         errors: Dict[str, str] = {}
         for path, broker_datapoint in datapoints.items():
             value = _broker_datapoint_to_val2_value(broker_datapoint)
+
             try:
                 await self._stub.Actuate(
                     ActuateRequest(signal_id=SignalID(path=path), value=value),
                     metadata=self._metadata,
                 )
+                logger.debug("Actuate succeeded for %s", path)
             except grpc.aio.AioRpcError as actuate_error:  # type: ignore
-                # Not every signal is an actuator; fall back to publishing the
-                # value for sensors/attributes.
-                try:
-                    await self._stub.PublishValue(
-                        PublishValueRequest(
-                            signal_id=SignalID(path=path),
-                            data_point=Val2Datapoint(value=value),
-                        ),
-                        metadata=self._metadata,
-                    )
-                except grpc.aio.AioRpcError:  # type: ignore
-                    errors[path] = actuate_error.details() or str(actuate_error.code())
+                logger.error(
+                    "Actuate failed for %s: %s %s",
+                    path,
+                    actuate_error.code(),
+                    actuate_error.details(),
+                )
+                errors[path] = (
+                    actuate_error.details() or str(actuate_error.code())
+                )
         return _Val2SetDatapointsResponse(errors)
 
     def Subscribe(self, query: str):
