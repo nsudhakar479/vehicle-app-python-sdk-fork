@@ -31,11 +31,11 @@ extra_requirements = {
         ##########################################
         # Runtime Packages
         ##########################################
-        "protobuf",
-        "grpcio>=1.59.0",
-        "grpcio-tools",
+        "protobuf==5.29.5",
+        "grpcio==1.64.1",
+        "grpcio-tools==1.64.1",
         "grpc-stubs",
-        "mypy-protobuf",
+        "mypy-protobuf==3.6.0",
         "apscheduler",
         "Deprecated",
         "types-Deprecated",
