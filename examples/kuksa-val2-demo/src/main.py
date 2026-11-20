@@ -80,6 +80,7 @@ class Driver(Model):
 class Row1HVAC(Model):
     def __init__(self, parent):
         super().__init__(parent)
+        self.name = "Row1"
         self.Driver = Driver(self)
 
 

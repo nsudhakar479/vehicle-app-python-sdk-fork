@@ -23,9 +23,15 @@ import pytest
 
 from velocitas_sdk import config
 from velocitas_sdk.config import Config
+from velocitas_sdk.model import DataPointFloat, DataPointInt32, Model
 from velocitas_sdk.proto.types_pb2 import Datapoint as BrokerDatapoint
 from velocitas_sdk.proto.types_pb2 import Int32Array as BrokerInt32Array
-from velocitas_sdk.proto.val2_pb2 import GetValuesResponse, ListMetadataResponse
+from velocitas_sdk.proto.val2_pb2 import (
+    GetValuesResponse,
+    ListMetadataResponse,
+    SubscribeResponse,
+)
+from velocitas_sdk.proto.val2_pb2 import SubscribeRequest as ValV2SubscribeRequest
 from velocitas_sdk.proto.val2_types_pb2 import Datapoint, Int32Array, Metadata, Value
 from velocitas_sdk.vdb.client import (
     VehicleDataBrokerClientValV2,
@@ -34,6 +40,7 @@ from velocitas_sdk.vdb.client import (
     _Val2DatapointAdapter,
     get_vdb_client,
 )
+from velocitas_sdk.vdb.reply import DataPointReply
 
 
 @pytest.fixture(autouse=True)
@@ -238,4 +245,81 @@ async def test_set_datapoints_reports_permission_denied_without_fallback():
         )
         assert result.errors["Vehicle.Powertrain.Transmission.PerformanceMode"]
         publish_value.assert_not_awaited()
+    await client.close()
+
+
+class _Vehicle(Model):
+    def __init__(self):
+        super().__init__()
+        self.name = "Vehicle"
+
+
+def _make_vehicle_data_points():
+    vehicle = _Vehicle()
+    return (
+        DataPointFloat("Speed", vehicle),
+        DataPointInt32("TraveledDistance", vehicle),
+    )
+
+
+async def _fake_stream(responses):
+    for response in responses:
+        yield response
+
+
+@pytest.mark.asyncio
+async def test_subscribe_sends_parsed_paths_and_metadata():
+    client = VehicleDataBrokerClientValV2()
+    with mock.patch.object(
+        client._stub, "Subscribe", side_effect=lambda *_a, **_kw: _fake_stream([])
+    ) as subscribe:
+        client.Subscribe("SELECT Vehicle.Speed, Vehicle.TraveledDistance")
+
+        subscribe.assert_called_once()
+        request: ValV2SubscribeRequest = subscribe.call_args.args[0]
+        assert list(request.signal_paths) == [
+            "Vehicle.Speed",
+            "Vehicle.TraveledDistance",
+        ]
+        assert subscribe.call_args.kwargs["metadata"] is client._metadata
+    await client.close()
+
+
+@pytest.mark.asyncio
+async def test_subscribe_retains_unchanged_values_across_deltas():
+    speed, traveled_distance = _make_vehicle_data_points()
+
+    snapshot = SubscribeResponse(
+        entries={
+            "Vehicle.Speed": Datapoint(value=Value(float=10.0)),
+            "Vehicle.TraveledDistance": Datapoint(value=Value(int32=100)),
+        }
+    )
+    delta = SubscribeResponse(
+        entries={"Vehicle.Speed": Datapoint(value=Value(float=20.0))}
+    )
+
+    client = VehicleDataBrokerClientValV2()
+    with mock.patch.object(
+        client._stub,
+        "Subscribe",
+        side_effect=lambda *_a, **_kw: _fake_stream([snapshot, delta]),
+    ):
+        reply_stream = client.Subscribe(
+            "SELECT Vehicle.Speed, Vehicle.TraveledDistance"
+        )
+
+        first_reply = await reply_stream.__anext__()
+        assert DataPointReply(first_reply).get(speed).value == 10.0
+        assert DataPointReply(first_reply).get(traveled_distance).value == 100
+
+        second_reply = await reply_stream.__anext__()
+        assert DataPointReply(second_reply).get(speed).value == 20.0
+        # TraveledDistance was not part of the delta, its last known value
+        # must still be retrievable.
+        assert DataPointReply(second_reply).get(traveled_distance).value == 100
+
+        # The snapshot yielded earlier must not be mutated by the later delta.
+        assert DataPointReply(first_reply).get(speed).value == 10.0
+        assert DataPointReply(first_reply).get(traveled_distance).value == 100
     await client.close()

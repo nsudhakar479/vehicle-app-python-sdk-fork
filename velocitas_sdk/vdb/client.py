@@ -28,6 +28,8 @@ from velocitas_sdk.proto.broker_pb2 import (
     SubscribeRequest,
 )
 from velocitas_sdk.proto.broker_pb2_grpc import BrokerStub
+from velocitas_sdk.proto.types_pb2 import ChangeType
+from velocitas_sdk.proto.types_pb2 import DataType as LegacyDataType
 from velocitas_sdk.proto.val2_pb2 import (
     ActuateRequest,
     BatchActuateRequest,
@@ -36,6 +38,7 @@ from velocitas_sdk.proto.val2_pb2 import (
 )
 from velocitas_sdk.proto.val2_pb2 import SubscribeRequest as ValV2SubscribeRequest
 from velocitas_sdk.proto.val2_pb2_grpc import VALStub
+from velocitas_sdk.proto.val2_types_pb2 import DataType as Val2DataType
 from velocitas_sdk.proto.val2_types_pb2 import (
     BoolArray,
     DoubleArray,
@@ -192,6 +195,43 @@ _VAL2_ARRAY_FIELDS = frozenset(
     name for name in _LEGACY_FIELD_TO_VAL2_TYPED_VALUE if name.endswith("_array")
 )
 
+# Maps kuksa.val.v2.DataType enum values to the corresponding legacy
+# sdv.databroker.v1.DataType enum values. Array variants share the same
+# numeric values in both enums, scalars are offset by the VAL v2
+# DATA_TYPE_UNSPECIFIED entry.
+_VAL2_TO_LEGACY_DATA_TYPE = {
+    Val2DataType.DATA_TYPE_STRING: LegacyDataType.STRING,
+    Val2DataType.DATA_TYPE_BOOLEAN: LegacyDataType.BOOL,
+    Val2DataType.DATA_TYPE_INT8: LegacyDataType.INT8,
+    Val2DataType.DATA_TYPE_INT16: LegacyDataType.INT16,
+    Val2DataType.DATA_TYPE_INT32: LegacyDataType.INT32,
+    Val2DataType.DATA_TYPE_INT64: LegacyDataType.INT64,
+    Val2DataType.DATA_TYPE_UINT8: LegacyDataType.UINT8,
+    Val2DataType.DATA_TYPE_UINT16: LegacyDataType.UINT16,
+    Val2DataType.DATA_TYPE_UINT32: LegacyDataType.UINT32,
+    Val2DataType.DATA_TYPE_UINT64: LegacyDataType.UINT64,
+    Val2DataType.DATA_TYPE_FLOAT: LegacyDataType.FLOAT,
+    Val2DataType.DATA_TYPE_DOUBLE: LegacyDataType.DOUBLE,
+    Val2DataType.DATA_TYPE_TIMESTAMP: LegacyDataType.TIMESTAMP,
+    Val2DataType.DATA_TYPE_STRING_ARRAY: LegacyDataType.STRING_ARRAY,
+    Val2DataType.DATA_TYPE_BOOLEAN_ARRAY: LegacyDataType.BOOL_ARRAY,
+    Val2DataType.DATA_TYPE_INT8_ARRAY: LegacyDataType.INT8_ARRAY,
+    Val2DataType.DATA_TYPE_INT16_ARRAY: LegacyDataType.INT16_ARRAY,
+    Val2DataType.DATA_TYPE_INT32_ARRAY: LegacyDataType.INT32_ARRAY,
+    Val2DataType.DATA_TYPE_INT64_ARRAY: LegacyDataType.INT64_ARRAY,
+    Val2DataType.DATA_TYPE_UINT8_ARRAY: LegacyDataType.UINT8_ARRAY,
+    Val2DataType.DATA_TYPE_UINT16_ARRAY: LegacyDataType.UINT16_ARRAY,
+    Val2DataType.DATA_TYPE_UINT32_ARRAY: LegacyDataType.UINT32_ARRAY,
+    Val2DataType.DATA_TYPE_UINT64_ARRAY: LegacyDataType.UINT64_ARRAY,
+    Val2DataType.DATA_TYPE_FLOAT_ARRAY: LegacyDataType.FLOAT_ARRAY,
+    Val2DataType.DATA_TYPE_DOUBLE_ARRAY: LegacyDataType.DOUBLE_ARRAY,
+    Val2DataType.DATA_TYPE_TIMESTAMP_ARRAY: LegacyDataType.TIMESTAMP_ARRAY,
+}
+
+
+def _val2_to_legacy_data_type(data_type) -> "LegacyDataType.ValueType":
+    return _VAL2_TO_LEGACY_DATA_TYPE.get(data_type, LegacyDataType.STRING)
+
 
 def _broker_datapoint_to_val2_value(broker_datapoint) -> Value:
     """Converts a legacy sdv.databroker.v1.Datapoint into a kuksa.val.v2.Value."""
@@ -257,8 +297,17 @@ class _Val2SubscribeReply:
 
 
 class _Val2MetadataEntry:
-    def __init__(self, name: str):
-        self.name = name
+    """Exposes a kuksa.val.v2.Metadata entry using the legacy Metadata
+    attribute names (`id`, `name`, `data_type`, `change_type`, `description`)."""
+
+    def __init__(self, metadata):
+        self.id = metadata.id
+        self.name = metadata.path
+        self.data_type = _val2_to_legacy_data_type(metadata.data_type)
+        # VAL v2 metadata has no equivalent of the legacy change_type; ON_CHANGE
+        # is the most common behavior for VSS signals.
+        self.change_type = ChangeType.ON_CHANGE
+        self.description = metadata.description
 
 
 class _Val2GetMetadataResponse:
@@ -393,7 +442,7 @@ class VehicleDataBrokerClientValV2:
                 ListMetadataRequest(root="Vehicle"), metadata=self._metadata
             )
             entries = [
-                _Val2MetadataEntry(metadata.path)
+                _Val2MetadataEntry(metadata)
                 for metadata in response.metadata
                 if not names or metadata.path in names
             ]
