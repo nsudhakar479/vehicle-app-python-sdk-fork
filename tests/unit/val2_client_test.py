@@ -148,8 +148,8 @@ async def test_set_datapoints_actuate_success():
     client = VehicleDataBrokerClientValV2()
     with (
         mock.patch.object(
-            client._stub, "Actuate", new_callable=mock.AsyncMock
-        ) as actuate,
+            client._stub, "BatchActuate", new_callable=mock.AsyncMock
+        ) as batch_actuate,
         mock.patch.object(
             client._stub, "PublishValue", new_callable=mock.AsyncMock
         ) as publish_value,
@@ -162,7 +162,7 @@ async def test_set_datapoints_actuate_success():
             }
         )
         assert not result.errors
-        actuate.assert_awaited_once()
+        batch_actuate.assert_awaited_once()
         publish_value.assert_not_awaited()
     await client.close()
 
@@ -173,7 +173,7 @@ async def test_set_datapoints_reports_invalid_argument_without_publish():
     with (
         mock.patch.object(
             client._stub,
-            "Actuate",
+            "BatchActuate",
             new_callable=mock.AsyncMock,
             side_effect=_rpc_error(grpc.StatusCode.INVALID_ARGUMENT),
         ),
@@ -195,7 +195,7 @@ async def test_set_datapoints_reports_unavailable_without_publish():
     with (
         mock.patch.object(
             client._stub,
-            "Actuate",
+            "BatchActuate",
             new_callable=mock.AsyncMock,
             side_effect=_rpc_error(grpc.StatusCode.UNAVAILABLE),
         ),
@@ -221,7 +221,7 @@ async def test_set_datapoints_reports_permission_denied_without_fallback():
     with (
         mock.patch.object(
             client._stub,
-            "Actuate",
+            "BatchActuate",
             new_callable=mock.AsyncMock,
             side_effect=_rpc_error(grpc.StatusCode.PERMISSION_DENIED),
         ),

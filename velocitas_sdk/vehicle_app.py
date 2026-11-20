@@ -20,7 +20,7 @@ import logging
 from warnings import warn
 
 from velocitas_sdk import config
-from velocitas_sdk.vdb.client import VehicleDataBrokerClient
+from velocitas_sdk.vdb.client import get_vdb_client
 from velocitas_sdk.vdb.subscriptions import SubscriptionManager, VdbSubscription
 
 logger = logging.getLogger(__name__)
@@ -67,7 +67,7 @@ class VehicleApp:
 
     def __init__(self):
         self.middleware = config.middleware
-        self._vdb_client = VehicleDataBrokerClient()
+        self._vdb_client = get_vdb_client()
         self.pubsub_client = self.middleware.pubsub_client
         logger.debug("VehicleApp instantiation successfully done")
 

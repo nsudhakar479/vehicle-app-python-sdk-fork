@@ -30,6 +30,7 @@ from velocitas_sdk.proto.broker_pb2 import (
 from velocitas_sdk.proto.broker_pb2_grpc import BrokerStub
 from velocitas_sdk.proto.val2_pb2 import (
     ActuateRequest,
+    BatchActuateRequest,
     GetValuesRequest,
     ListMetadataRequest,
 )
@@ -345,25 +346,30 @@ class VehicleDataBrokerClientValV2:
 
     async def SetDatapoints(self, datapoints):
         errors: Dict[str, str] = {}
-        for path, broker_datapoint in datapoints.items():
-            value = _broker_datapoint_to_val2_value(broker_datapoint)
+        paths = list(datapoints.keys())
+        actuate_requests = [
+            ActuateRequest(
+                signal_id=SignalID(path=path),
+                value=_broker_datapoint_to_val2_value(broker_datapoint),
+            )
+            for path, broker_datapoint in datapoints.items()
+        ]
 
-            try:
-                await self._stub.Actuate(
-                    ActuateRequest(signal_id=SignalID(path=path), value=value),
-                    metadata=self._metadata,
-                )
-                logger.debug("Actuate succeeded for %s", path)
-            except grpc.aio.AioRpcError as actuate_error:  # type: ignore
-                logger.error(
-                    "Actuate failed for %s: %s %s",
-                    path,
-                    actuate_error.code(),
-                    actuate_error.details(),
-                )
-                errors[path] = (
-                    actuate_error.details() or str(actuate_error.code())
-                )
+        try:
+            await self._stub.BatchActuate(
+                BatchActuateRequest(actuate_requests=actuate_requests),
+                metadata=self._metadata,
+            )
+            logger.debug("BatchActuate succeeded for %s", paths)
+        except grpc.aio.AioRpcError as actuate_error:  # type: ignore
+            logger.error(
+                "BatchActuate failed for %s: %s %s",
+                paths,
+                actuate_error.code(),
+                actuate_error.details(),
+            )
+            error_message = actuate_error.details() or str(actuate_error.code())
+            errors = {path: error_message for path in paths}
         return _Val2SetDatapointsResponse(errors)
 
     def Subscribe(self, query: str):
@@ -375,19 +381,22 @@ class VehicleDataBrokerClientValV2:
         return self._wrap_subscription(stream)
 
     async def _wrap_subscription(self, stream):
+        latest_fields: Dict[str, "_Val2DatapointAdapter"] = {}
         async for response in stream:
-            fields = {
-                path: _Val2DatapointAdapter(data_point)
-                for path, data_point in response.entries.items()
-            }
-            yield _Val2SubscribeReply(fields)
+            for path, data_point in response.entries.items():
+                latest_fields[path] = _Val2DatapointAdapter(data_point)
+            yield _Val2SubscribeReply(dict(latest_fields))
 
     async def GetMetadata(self, names: list):
         try:
             response = await self._stub.ListMetadata(
                 ListMetadataRequest(root="Vehicle"), metadata=self._metadata
             )
-            entries = [_Val2MetadataEntry(metadata.path) for metadata in response.metadata]
+            entries = [
+                _Val2MetadataEntry(metadata.path)
+                for metadata in response.metadata
+                if not names or metadata.path in names
+            ]
             return _Val2GetMetadataResponse(entries)
         except grpc.aio.AioRpcError:  # type: ignore
             logger.exception(
